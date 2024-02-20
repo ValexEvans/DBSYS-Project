@@ -28,7 +28,7 @@ function doLogin() {
   let jsonPayload = JSON.stringify(tmp);
   console.log("jsonPayload= " + jsonPayload);
 
-  let url = "http://" + urlBase + "/LAMPAPI/Login." + extension;
+  let url = "http://" + urlBase + "/api/Login." + extension;
   //let url = '/var/www/html/LAMPAPI/Login.' + extension;
 
   let xhr = new XMLHttpRequest();
@@ -105,6 +105,53 @@ function readCookie() {
   }
 }
 
+function addUser() {
+  //readCookie();
+  userId = sessionStorage.getItem("userId");
+  console.log("UserId in addUser:", userId);
+  let login = document.getElementById("userLogin").value; // Replace with actual login field
+  let password = document.getElementById("userPassword").value; // Replace with actual password field
+  let firstName = document.getElementById("userFirst").value;
+  let lastName = document.getElementById("userLast").value;
+  let email = document.getElementById("userEmail").value;
+  //document.getElementById("userAddResult").innerHTML = "";
+
+  let tmp = {
+    login: login,
+    password: password,
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    userid: userId,
+  };
+  let jsonPayload = JSON.stringify(tmp);
+  console.log("jsonPayload= " + jsonPayload);
+
+  let url = "http://" + urlBase + "/api/AddUser." + extension;
+
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  try {
+    xhr.onreadystatechange = async function () {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log("User has been added");
+        //document.getElementById("userAddResult").innerHTML = "User has been added";
+        alert("User has been added successfully");
+        // You may need to update the following lines based on your application's needs
+        const getUsersResult = await getUsers(""); // Adjust this line based on your retrieval method
+        console.log(getUsersResult);
+        loadUsers(6); // Adjust this line based on your display method
+        window.location.reload();
+      }
+    };
+    xhr.send(jsonPayload);
+  } catch (err) {
+    console.log(err.message);
+    document.getElementById("userAddResult").innerHTML = err.message;
+  }
+}
+
 function doRegister() {
   // reset required red borders
   document.getElementById("registerFirstName").className = "ele";
@@ -118,12 +165,19 @@ function doRegister() {
   let login = document.getElementById("registerLogin").value;
   let password = document.getElementById("registerPassword").value;
 
+  if (firstName === "" || lastName === "" || login === "" || password === "") {
+    document.getElementById("registerResult").innerHTML =
+      "Please fill out all fields";
+    return;
+  }
+
   // create json payload
   let tmp = {
     login: login,
     password: password,
     firstName: firstName,
     lastName: lastName,
+    email: "", // Add the email field if required
   };
 
   // resets fields
@@ -135,7 +189,7 @@ function doRegister() {
   let jsonPayload = JSON.stringify(tmp);
   console.log("jsonPayload= " + jsonPayload);
 
-  let url = "http://" + urlBase + "/LAMPAPI/Register." + extension;
+  let url = "http://" + urlBase + "/LAMPAPI/AddUser." + extension;
 
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
@@ -144,7 +198,7 @@ function doRegister() {
     xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         let jsonObject = JSON.parse(xhr.responseText);
-        userId = jsonObject.id;
+        userId = jsonObject.UserID;
 
         if (userId < 1) {
           let err = jsonObject.error;
@@ -157,7 +211,7 @@ function doRegister() {
     };
     xhr.send(jsonPayload);
   } catch (err) {
-    document.getElementById("loginResult").innerHTML = err.message;
+    document.getElementById("registerResult").innerHTML = err.message;
   }
 }
 
