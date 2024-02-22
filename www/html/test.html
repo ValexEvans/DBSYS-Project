@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Form to Call PHP</title>
+</head>
+<body>
+
+<form id="myForm" action="/www/html/test-api/database_connection.php" method="post">
+    <input type="button" value="Connect to Database" onclick="submitForm()">
+</form>
+
+<script>
+    function submitForm() {
+        document.getElementById("myForm").submit();
+    }
+</script>
+
+</body>
+</html>
