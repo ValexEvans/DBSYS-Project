@@ -10,8 +10,11 @@
 <form id="myForm" action="/test-api/database_connection.php" method="post">
     <input type="button" value="Connect to Database" onclick="submitForm()">
 </form>
-<form id="myForm1" action="/test-api/CreateTable.php" method="post">
-    <input type="button" value="Create a Table" onclick="submitForm1()">
+<form id="myForm1" action="/test-api/CreateDB.php" method="post">
+    <input type="button" value="Create a Database" onclick="submitForm1()">
+</form>
+<form id="myForm2" action="/test-api/CreateTable.php" method="post">
+    <input type="button" value="Create a Table" onclick="submitForm2()">
 </form>
 
 <script>
@@ -20,6 +23,9 @@
     }
     function submitForm1() {
         document.getElementById("myForm1").submit();
+    }
+    function submitForm2() {
+        document.getElementById("myForm2").submit();
     }
 </script>
 
