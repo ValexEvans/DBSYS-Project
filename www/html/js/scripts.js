@@ -10,7 +10,13 @@ let userLastName = "";
 let contactSearchList = [];
 let contactList = [];
 
+function generateHtmlContent() {
+  return "<p>Hello, this is some HTML content!</p>";
+}
+
 function doLogin() {
+  generateHtmlContent();
+
   userId = 0;
   firstName = "";
   lastName = "";
@@ -153,6 +159,7 @@ function addUser() {
 }
 
 function doRegister() {
+  generateHtmlContent();
   // reset required red borders
   document.getElementById("registerFirstName").className = "ele";
   document.getElementById("registerLastName").className = "ele";
