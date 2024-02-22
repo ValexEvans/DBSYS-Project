@@ -7,9 +7,9 @@ reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )  -->
 
 <?php
-$servername = "localhost";
-$username = "username";
-$password = "password";
+$servername = "159.65.249.35";
+$username = "root";
+$password = "Val21212@S1n2o3w4w";
 $dbname = "myDB";
 
 // Create connection
