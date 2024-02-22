@@ -10,10 +10,16 @@
 <form id="myForm" action="/test-api/database_connection.php" method="post">
     <input type="button" value="Connect to Database" onclick="submitForm()">
 </form>
+<form id="myForm1" action="/test-api/CreateTable.php" method="post">
+    <input type="button" value="Create a Table" onclick="submitForm1()">
+</form>
 
 <script>
     function submitForm() {
         document.getElementById("myForm").submit();
+    }
+    function submitForm1() {
+        document.getElementById("myForm1").submit();
     }
 </script>
 
