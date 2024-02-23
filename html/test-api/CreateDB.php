@@ -4,19 +4,21 @@ $username = "root";
 $password = "Val21212@S1n2o3w4w";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password);
+$conn = mysql_connect($servername, $username, $password);
+
 // Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+if (!$conn) {
+    die("Connection failed: " . mysql_error());
 }
 
 // Create database
 $sql = "CREATE DATABASE myDB";
-if ($conn->query($sql) === TRUE) {
-  echo "Database created successfully";
+if (mysql_query($sql, $conn)) {
+    echo "Database created successfully";
 } else {
-  echo "Error creating database: " . $conn->error;
+    echo "Error creating database: " . mysql_error();
 }
 
-$conn->close();
-?> 
+// Close connection
+mysql_close($conn);
+?>
