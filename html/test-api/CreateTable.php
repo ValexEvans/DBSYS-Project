@@ -7,7 +7,7 @@ reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )  -->
 
 <?php
-$servername = "159.65.249.35";
+$servername = "143.110.224.7";
 $username = "root";
 $password = "Val21212@S1n2o3w4w";
 $dbname = "myDB";
