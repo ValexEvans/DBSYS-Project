@@ -196,7 +196,7 @@ function doRegister() {
   let jsonPayload = JSON.stringify(tmp);
   console.log("jsonPayload= " + jsonPayload);
 
-  let url = "http://" + urlBase + "/LAMPAPI/AddUser." + extension;
+  let url = "http://" + urlBase + "/api/AddUser." + extension;
 
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
