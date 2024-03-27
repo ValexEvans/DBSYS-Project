@@ -2,26 +2,26 @@
     $inData = getRequestInfo();
     
     $UserID = 0;
-    $firstName = "";
-    $lastName = "";
+    $FirstName = "";
+    $LastName = "";
     $Email = "";
     $Role = "";
 
-    $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
+    $conn = new mysqli("localhost", "TBeast", "WeLoveCOP4331", "COP4331");
     if( $conn->connect_error )
     {
         returnWithError( $conn->connect_error );
     }
     else
     {
-        $stmt = $conn->prepare("SELECT UserID, firstName, lastName, Email, Role FROM Users WHERE Login=? AND Password =?");
+        $stmt = $conn->prepare("SELECT UserID, FirstName, LastName, Email, Role FROM Users WHERE Login=? AND Password =?");
         $stmt->bind_param("ss", $inData["login"], $inData["password"]);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if( $row = $result->fetch_assoc() )
         {
-            returnWithInfo($row['UserID'], $row['firstName'], $row['lastName'], $row['Email'], $row['Role']);
+            returnWithInfo($row['UserID'], $row['FirstName'], $row['LastName'], $row['Email'], $row['Role']);
         }
         else
         {
@@ -45,13 +45,13 @@
     
     function returnWithError( $err )
     {
-        $retValue = '{"UserID":0,"firstName":"","lastName":"","Email":"","Role":"","error":"' . $err . '"}';
+        $retValue = '{"UserID":0,"FirstName":"","LastName":"","Email":"","Role":"","error":"' . $err . '"}';
         sendResultInfoAsJson( $retValue );
     }
     
-    function returnWithInfo( $UserID, $firstName, $lastName, $Email, $Role )
+    function returnWithInfo( $UserID, $FirstName, $LastName, $Email, $Role )
     {
-        $retValue = '{"UserID":' . $UserID . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","Email":"' . $Email . '","Role":"' . $Role . '","error":""}';
+        $retValue = '{"UserID":' . $UserID . ',"FirstName":"' . $FirstName . '","LastName":"' . $LastName . '","Email":"' . $Email . '","Role":"' . $Role . '","error":""}';
         sendResultInfoAsJson( $retValue );
     }
 ?>
